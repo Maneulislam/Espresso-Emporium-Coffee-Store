@@ -31,6 +31,16 @@ async function run() {
 
         const coffeesCollection = client.db('coffeeDB').collection('coffees');
 
+
+        app.get('/coffees', async (req, res) => {
+
+            const result = await coffeesCollection.find().toArray();
+            res.send(result);
+
+        })
+
+
+
         app.post('/coffees', async (req, res) => {
             const coffee = req.body;
             const result = await coffeesCollection.insertOne(coffee);

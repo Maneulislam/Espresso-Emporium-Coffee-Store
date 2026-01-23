@@ -1,5 +1,6 @@
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const AddCoffee = () => {
 
@@ -21,7 +22,17 @@ const AddCoffee = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log("After adding", data);
+                if (data.insertedId) {
+
+                    console.log("After adding", data);
+
+                    Swal.fire({
+                        title: "Coffee added successfully!",
+                        icon: "success",
+                        draggable: true
+                    });
+                }
+
             })
 
     }
@@ -62,9 +73,9 @@ const AddCoffee = () => {
                             </div>
                             <div className="form-control md:w-1/2">
                                 <label className="label">
-                                    <span className="label-text font-semibold text-lg">Chef</span>
+                                    <span className="label-text font-semibold text-lg">Price</span>
                                 </label>
-                                <input type="text" name="chef" placeholder="Enter coffee chef" className="input input-bordered w-full bg-white focus:outline-none" />
+                                <input type="text" name="price" placeholder="Enter coffee Price" className="input input-bordered w-full bg-white focus:outline-none" />
                             </div>
                         </div>
 
