@@ -1,19 +1,47 @@
+import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router";
 
 const AddCoffee = () => {
+
+
+    const handleAddCoffee = event => {
+        event.preventDefault();
+        const form = event.target;
+
+        const formData = new FormData(form);
+        const newCoffee = Object.fromEntries(formData.entries());
+        console.log(newCoffee);
+
+        fetch('http://localhost:3000/coffees', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newCoffee)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("After adding", data);
+            })
+
+    }
+
+
     return (
         <div className="bg-white ">
-            <div className=" w-9/12 mx-auto bg-[#F4F3F0]">
-                {/* Back to Home Link */}
-                {/* <div className="max-w-7xl mx-auto mb-8">
-                <Link to="/" className="flex items-center gap-2 text-[#374151] hover:text-[#D2B48C] transition-colors font-rancho text-2xl">
-                    <FaArrowLef />
-                    <span style={{ fontFamily: 'Rancho, cursive' }}>Back to home</span>
-                </Link>
-            </div> */}
+            {/* Back to Home Link */}
+            <div className="max-w-7xl mx-auto mb-14">
+
+                <div className="my-12">
+                    <Link to="/" className="flex items-center gap-2 text-[#374151] hover:text-[#D2B48C] transition-colors font-rancho text-2xl">
+                        <FaArrowLeft />
+                        <span style={{ fontFamily: 'Rancho, cursive' }}>Back to home</span>
+                    </Link>
+                </div>
+
 
                 {/* Form Container */}
-                <div className="bg-[#F4F3F0]  mx-auto py-16 px-8 md:px-28 rounded-lg">
+                <div className="bg-[#F4F3F0]  mx-auto py-16 px-8 md:px-20 rounded-lg">
                     <div className="text-center mb-8">
                         <h2 className="text-4xl font-bold text-[#374151] mb-4" style={{ fontFamily: 'Rancho, cursive' }}>
                             Add New Coffee
@@ -23,7 +51,7 @@ const AddCoffee = () => {
                         </p>
                     </div>
 
-                    <form>
+                    <form onSubmit={handleAddCoffee}>
                         {/* Form Row 1: Name & Chef */}
                         <div className="md:flex gap-6 mb-6">
                             <div className="form-control md:w-1/2">
