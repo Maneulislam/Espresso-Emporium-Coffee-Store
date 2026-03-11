@@ -8,7 +8,7 @@ const Home = () => {
     console.log(coffees);
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-y-7'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-y-7  w-full mx-auto'>
             {
                 coffees.map(coffee => <CoffeeCard key={coffee._id} coffee={coffee}></CoffeeCard>)
             }
